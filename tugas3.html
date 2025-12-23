@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Interaktif</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .faq-container {
+            margin-top: 20px;
+        }
+        .question {
+            background-color: #cb18fd; /* Ungu Cerah */
+            color: white;
+            padding: 15px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        /* Style saat di-hover (diatur via jQuery) */
+        .question-hover {
+            background-color: #3a1735; /* Ungu Gelap */
+            color: rgb(160, 125, 125);
+        }
+        .answer {
+            background-color: #f1bff5; /* Ungu Muda */
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: none; /* Awalnya tersembunyi */
+        }
+        .arrow {
+            float: right;
+            transition: transform 0.3s;
+        }
+        .expanded .arrow {
+            transform: rotate(90deg); /* Panah berputar saat dibuka */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>FAQ Interaktif</h1>
+
+    <div class="faq-container">
+        <div class="question" id="q1">
+            Apa itu jQuery? <span class="arrow">▶</span>
+        </div>
+        <div class="answer">
+            JQuery juga merupakan library JavaScript yang dapat mempercepat proses pembuatan website dengan sintaks yang tidak terlalu rumit, kodenya ringkas, dan fiturnya lengkap. jQuery membuat pemrosesan di HTML, seperti event handling, animasi, perubahan dan manipulasi dokumen, serta Ajax dapat menjadi lebih sederhana.
+        </div>
+
+        <div class="question" id="q2">
+            Bagaimana cara menggunakan .click() di jQuery? <span class="arrow">▶</span>
+        </div>
+        <div class="answer">
+            Metode .click() digunakan untuk melampirkan penangan acara "click" ke elemen HTML yang dipilih. Sintaks dasarnya adalah $("selector").click(function() { ... });.
+        </div>
+
+        <div class="question" id="q3">
+            Apa fungsi dari .toggle()? <span class="arrow">▶</span>
+        </div>
+        <div class="answer">
+            Metode .toggle() digunakan untuk menampilkan atau menyembunyikan elemen yang cocok. Jika elemen ditampilkan, elemen tersebut disembunyikan; jika disembunyikan, elemen tersebut ditampilkan. Ini sangat berguna untuk menu dropdown atau, seperti dalam kasus ini, jawaban FAQ.
+        </div>
+        
+        <div class="question" id="q4">
+            Apa perbedaan antara .hover() dan CSS :hover? <span class="arrow">▶</span>
+        </div>
+        <div class="answer">
+            CSS :hover murni untuk tujuan gaya visual sederhana. .hover() jQuery adalah fungsi pintasan untuk mengikat dua penangan acara: satu untuk mouseenter (saat masuk) dan satu lagi untuk mouseleave (saat keluar), memungkinkan Anda menjalankan logika JavaScript yang lebih kompleks.
+        </div>
+
+        <div class="question" id="q5">
+            Apakah jQuery masih relevan di tahun ini? <span class="arrow">▶</span>
+        </div>
+        <div class="answer">
+            Meskipun kerangka kerja JavaScript modern seperti React, Vue, dan Angular lebih populer untuk aplikasi kompleks, jQuery masih digunakan secara luas di jutaan situs web dan sangat relevan untuk proyek yang membutuhkan manipulasi DOM yang cepat dan sederhana.
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // 1. Logika Klik: Membuka/Menutup Jawaban
+            $('.question').click(function() {
+                // Mencari elemen .answer tepat di bawah .question yang diklik
+                $(this).next('.answer').slideToggle(300);
+                
+                // Menambahkan/menghapus class 'expanded' untuk efek panah
+                $(this).toggleClass('expanded');
+            });
+
+            // 2. Logika Hover: Mengubah warna saat kursor masuk/keluar
+            $('.question').hover(
+                function() {
+                    $(this).addClass('question-hover');
+                }, 
+                function() {
+                    $(this).removeClass('question-hover');
+                }
+            );
+        });
+    </script>
+    
+</body>
+</html>
